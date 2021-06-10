@@ -15,13 +15,13 @@ const Author: React.FC<AuthorProps>= (props) => {
     return (
         <li className="Author-div px-0 py-0">
             <Row className="Author-cont py-1 px-0 mx-0">
-                <Col className="px-0">
+                <Col className="px-0 col-lg-10">
                     <label>{num}. {author.name}</label>
                 </Col>
-                <Col className="edit-item m-0 p-0 text-lg-end">
+                <Col className="edit-item m-0 p-0 text-lg-right col-lg-1">
                     <Icon.Edit color="#ff8b12" size="25"/>
                 </Col>
-                <Col className="delete-item m-0 p-0 text-center">
+                <Col className="delete-item m-0 pr-2 text-lg-right col-lg-1">
                     <Icon.Trash2 color="#bb1d1e" size="25"/>
                 </Col>
             </Row>
