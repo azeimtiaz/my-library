@@ -1,4 +1,4 @@
-import React, {FormEvent, useState} from 'react';
+import React, {FormEvent, useEffect, useState} from 'react';
 import {Button, Col, Form, Row} from "react-bootstrap";
 import * as Icon from 'react-feather';
 import {IAuthor} from "../../../types/LibraryTypes";
@@ -6,35 +6,59 @@ import {IAuthor} from "../../../types/LibraryTypes";
 type AuthorFormProps = {
     formTitle: string
     alertMessage: string
+    authorToUpdate: IAuthor
     onFormClose: () => void
     onAuthorAddition: (author: IAuthor) => void
+    onAuthorUpdate: (name: string) => void
 }
 
 const AuthorForm: React.FC<AuthorFormProps>= (props) => {
-    const [newAuthorName, setNewAuthorName] = useState('');
+    const{formTitle} = props;
+
+    const [newAuthorName, setNewAuthorName] = useState<string>('');
+    const [emptyAlert, setEmptyAlert] = useState('');
+    // const [inputValue, setInputValue] = useState('');
 
     const handleAuthorNameChange = (name: string) => {
         setNewAuthorName(name);
-    }
 
-    const createNewAuthor = () => {
         if(newAuthorName === null || newAuthorName === '') {
+            setEmptyAlert('Author name cannot be empty');
             return;
         }
+        setEmptyAlert('');
+    }
+
+    // useEffect(() => {
+    //   setNewAuthorName(props.authorToUpdate.name);
+    // },[inputValue]);
+
+
+    const createNewAuthor = () => {
         const newAuthor: IAuthor = {name: newAuthorName};
         props.onAuthorAddition(newAuthor);
         setNewAuthorName('');
         props.onFormClose();
     }
 
+    const updateAuthor = () => {
+        const updatedAuthor: IAuthor = {name: newAuthorName};
+        props.onAuthorUpdate(updatedAuthor.name);
+    }
+
     const handleOnFormSubmit = (event: FormEvent) => {
-        event.preventDefault()
+        event.preventDefault();
+
+        if(newAuthorName === '') {
+            setEmptyAlert('Author name cannot be empty');
+            return;
+        }
 
         if(props.formTitle === 'Create') {
             createNewAuthor();
         }
         if(props.formTitle === 'Update') {
-            return;
+            updateAuthor();
         }
         return;
     }
@@ -54,16 +78,17 @@ const AuthorForm: React.FC<AuthorFormProps>= (props) => {
                     <Form className="pt-4 ms-4 pl-lg-5 pl-sm-5" onSubmit={handleOnFormSubmit}>
                         <Form.Group controlId="authorformTitle">
                             <Form.Label className="author-field-name">Name of the Author</Form.Label>
-                            <label className="empty-name-alert text-danger">{props.alertMessage}</label>
+                            <label className="empty-name-alert text-danger">{emptyAlert}</label>
                             <Form.Control className="author-input-box px-0 px-sm-0"
                                           type="text"
                                           value={newAuthorName}
-                                          onChange={(event) =>
-                                              handleAuthorNameChange(event.target.value)}/>
+                                          onChange={(event) => {formTitle === 'Create' ?
+                                              handleAuthorNameChange(event.target.value) : handleAuthorNameChange(props.authorToUpdate.name)
+                                          }}/>
                         </Form.Group>
                         <div className="float-lg-right">
                             <Button className="create-btn" type="submit">
-                                {props.formTitle}
+                                {formTitle}
                             </Button>
                         </div>
 

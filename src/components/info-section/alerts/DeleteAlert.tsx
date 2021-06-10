@@ -8,13 +8,12 @@ type DeleteAlertProps = {
 
 const DeleteAlert: React.FC<DeleteAlertProps> = (props) => {
     const [show] = useState(true);
-    const handleClose = () => props.onDeleteConfirmation();
 
     return (
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show}>
             <Modal.Body><h4>Are you sure?</h4></Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary" onClick={() => props.onAuthorDeletionCancel()}>
                     Close
                 </Button>
                 <Button variant="primary" onClick={() => props.onDeleteConfirmation()}>

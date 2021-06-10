@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Col, Row, Toast} from "react-bootstrap";
 import AuthorList from "./AuthorList";
 import {IAuthor} from "../../../types/LibraryTypes";
@@ -20,13 +20,34 @@ const AuthorSection: React.FC = () => {
 
     const [authorToDeleteIndex,setAuthorToDeleteIndex] = useState(-1);
     const [authorToUpdateIndex,setAuthorToUpdateIndex] = useState(-1);
+    const [authorToUpdate,setAuthorToUpdate] = useState({name: ''});
 
     const handleFormClose = () => setShowAuthorForm(false);
 
     const handleEditRequest = (index: number) => {
+        setAuthorToUpdateIndex(index);
         setFormTitle('Update');
         setShowAuthorForm(true);
     }
+
+    const handleAuthorUpdate = (name: string) => {
+        if(!authors || authorToUpdate === null) {
+            return;
+        }
+
+        const listOfAuthors: IAuthor[] = authors.slice();
+        listOfAuthors.splice(authorToUpdateIndex, 1, {name: name});
+        setAuthors(listOfAuthors);
+        setAuthorToUpdateIndex(-1);
+        setAlertMessage('Author Updated');
+    }
+
+    useEffect(() => {
+       if(authorToUpdateIndex === -1) {
+           return;
+       }
+       setAuthorToUpdate(authors[authorToUpdateIndex]);
+    }, [authorToUpdateIndex]);
 
     const handleDeleteRequest = (index: number) => {
         setAuthorToDeleteIndex(index);
@@ -60,7 +81,7 @@ const AuthorSection: React.FC = () => {
         const listOfAuthors: IAuthor[] = authors.slice();
         listOfAuthors.push(author);
         setAuthors(listOfAuthors);
-        setAlertMessage('Author added successfully');
+        setAlertMessage('Author Created');
 
         setAuthorToastVisibility(true);
         setTimeout(() => {
@@ -107,7 +128,9 @@ const AuthorSection: React.FC = () => {
                         <AuthorForm formTitle={formTitle}
                                     onAuthorAddition={handleAuthorAddition}
                                     onFormClose={handleFormClose}
-                                    alertMessage={alertMessage} /> : null}
+                                    alertMessage={alertMessage}
+                                    authorToUpdate={authorToUpdate}
+                                    onAuthorUpdate={handleAuthorUpdate}/> : null}
                 </Col>
             </Row>
             <Row>
