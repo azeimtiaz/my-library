@@ -1,0 +1,203 @@
+@import "variables";
+
+.info-section {
+  padding-bottom: 20em;
+}
+
+.section-title {
+  h1 {
+    font-weight: 400;
+    color: $title;
+    border-bottom: 2px solid $title_line;
+  }
+}
+
+.no-authors {
+  margin-top: 5px;
+  font-style: italic;
+}
+
+.Author-div {
+  padding-left: 0;
+
+  .Author-cont {
+    margin: 0;
+    font-size: 1.2rem;
+
+    .edit-item {
+      text-align: right;
+      display: none;
+    }
+
+    .delete-item {
+      text-align: right;
+      display: none;
+    }
+  }
+  :hover {
+    background-color: $book_item_box;
+
+    .edit-item {
+      display: block;
+      cursor: pointer;
+    }
+
+    .delete-item {
+      display: block;
+      cursor: pointer;
+    }
+
+  }
+}
+
+.add-author {
+  .add-author-label {
+    vertical-align: bottom;
+    padding-left: 4px;
+    padding-top: 0;
+    font-size: 1.0em;
+    font-weight: 400;
+  }
+}
+
+.add-author {
+  :hover {
+    cursor: pointer;
+  }
+}
+
+.form-title {
+  font-size: 1.6rem;
+  justify-content: center;
+
+  label {
+    color: $create_book_title;
+    border-bottom: 2px solid $create_book_title;
+  }
+}
+
+.add-form {
+  margin-left: 20px;
+
+  .empty-name-alert {
+    float: right;
+    font-size: 0.9em;
+  }
+
+  .author-field-name {
+    font-size: 0.8rem;
+  }
+
+  .author-input-box{
+    border-color: $form_field_box;
+    border-radius: 0;
+    height: border-box;
+  }
+
+  .create-btn {
+    border-radius: 10px;
+    background-color: $create_btn;
+    margin-right: 0px;
+    margin-top: 20px;
+    padding: 5px 30px;
+    font-size: 1.1rem;
+  }
+}
+
+$breakpoint-phones: 360px;
+$breakpoint-tablets: 1024px;
+
+
+@media (max-width: $breakpoint-phones) {
+  .info-section{
+    .div {
+      width: 300px;
+    }
+    padding-bottom: 3em;
+  }
+
+  .section-title {
+    h1 {
+      font-size: 1.5em;
+    }
+  }
+
+  .Author-div {
+    padding-left: 0;
+
+    .Author-cont {
+      margin: 0;
+      font-size: 1.2rem;
+
+      .edit-item {
+        margin-right: 0.8em;
+        display: block;
+      }
+
+      .delete-item {
+        margin-left: 0.8em;
+        display: block;
+      }
+    }
+  }
+
+  .add-form {
+    margin-left: 0px;
+    padding-right: 20px;
+    .author-field-name {
+      font-size: 0.9em;
+    }
+    .select-input {
+      width: 250px;
+    }
+    .create-btn {
+      padding: 3px 20px;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-tablets) {
+  .info-section{
+    .div {
+      width: 300px;
+    }
+    padding-bottom: 3em;
+  }
+
+  .section-title {
+    h1 {
+      font-size: 1.5em;
+    }
+  }
+
+  .Author-div {
+    padding-left: 0;
+
+    .Author-cont {
+      margin: 0;
+      font-size: 1.2rem;
+
+      .edit-item {
+        width: 20px;
+        text-align-last: right;
+        display: block;
+      }
+
+      .delete-item {
+        width: 40px;
+        text-align-last: right;
+        display: block;
+      }
+    }
+  }
+
+  .add-form {
+    .author-field-name {
+      font-size: 0.9em;
+    }
+    .select-input {
+      width: 250px;
+    }
+  }
+}
+
