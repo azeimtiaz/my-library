@@ -19,7 +19,7 @@ const AuthorList: React.FC<AuthorListProps> = (props) => {
                 author={author}
                 key={index}
                 num={index + 1}
-                handleEditRequest={props.onEditRequest}/>
+                onEditRequest={props.onEditRequest}/>
         });
     };
 

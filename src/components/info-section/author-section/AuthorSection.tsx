@@ -18,7 +18,8 @@ const AuthorSection: React.FC = () => {
 
     const handleEditRequest = () => {
         setFormTitle('Update');
-        setShowAuthorForm(true)
+        setShowAuthorForm(true);
+        console.log('hello');
     }
 
     const handleAuthorAddition = () => {
@@ -48,7 +49,7 @@ const AuthorSection: React.FC = () => {
                 <Col className="form-section px-0">
                     {showAuthorForm ?
                         <AuthorForm formTitle={formTitle}
-                                    createFormClose={handleFormClose} /> : null}
+                                    onformClose={handleFormClose} /> : null}
                 </Col>
             </Row>
             <Row>

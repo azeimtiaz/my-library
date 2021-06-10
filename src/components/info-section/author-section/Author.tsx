@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 type AuthorProps = {
     num: number
     author: IAuthor
-    handleEditRequest: () => void
+    onEditRequest: () => void
 }
 
 const Author: React.FC<AuthorProps>= (props) => {
@@ -20,7 +20,7 @@ const Author: React.FC<AuthorProps>= (props) => {
                     <label>{num}. {author.name}</label>
                 </Col>
                 <Col className="edit-item m-0 p-0 text-lg-right col-lg-1">
-                    <Icon.Edit color="#ff8b12" size="25" onClick={() => props.handleEditRequest}/>
+                    <Icon.Edit color="#ff8b12" size="25" onClick={() => props.onEditRequest()}/>
                 </Col>
                 <Col className="delete-item m-0 pr-2 text-lg-right col-lg-1">
                     <Icon.Trash2 color="#bb1d1e" size="25"/>
