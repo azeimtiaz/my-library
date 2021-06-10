@@ -1,10 +1,10 @@
 import React from 'react';
 import * as Icon from "react-feather";
 
-const AddAuthor: React.FC = () => {
+const AddAuthor: React.FC= () => {
     return (
         <div>
-            <Icon.Plus className="text-left text" color="#0842a3" size="22"/>
+            <Icon.Plus className="text-left " color="#0842a3" size="22"/>
             <label className="add-author-label px-1"> Add Author </label>
         </div>
     );

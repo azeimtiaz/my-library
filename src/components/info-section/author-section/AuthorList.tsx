@@ -4,6 +4,7 @@ import Author from "./Author";
 
 type AuthorListProps = {
     authors: IAuthor[]
+    onEditRequest: () => void
 }
 
 const AuthorList: React.FC<AuthorListProps> = (props) => {
@@ -14,7 +15,11 @@ const AuthorList: React.FC<AuthorListProps> = (props) => {
         }
 
         return authors.map((author: IAuthor, index: number) => {
-            return <Author author={author} key={index} num={index + 1}/>
+            return <Author
+                author={author}
+                key={index}
+                num={index + 1}
+                handleEditRequest={props.onEditRequest}/>
         });
     };
 
