@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import {Col, Row, Toast} from "react-bootstrap";
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AuthorTitle: React.FC = () => {
