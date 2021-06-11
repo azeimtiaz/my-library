@@ -12,15 +12,15 @@ const AuthorSection: React.FC = () => {
     const authorName: IAuthor[] = [];
     const [authors, setAuthors] = useState(authorName);
 
-    const [showAuthorForm,setShowAuthorForm] = useState(false);
-    const [formTitle,setFormTitle] = useState('');
-    const [alertMessage,setAlertMessage] = useState('');
-    const [deleteAlertVisibility,setDeleteAlertVisibility] = useState(false);
-    const [authorToastVisibility,setAuthorToastVisibility] = useState(false);
+    const [showAuthorForm, setShowAuthorForm] = useState(false);
+    const [formTitle, setFormTitle] = useState('');
+    const [alertMessage, setAlertMessage] = useState('');
+    const [deleteAlertVisibility, setDeleteAlertVisibility] = useState(false);
+    const [authorToastVisibility, setAuthorToastVisibility] = useState(false);
 
-    const [authorToDeleteIndex,setAuthorToDeleteIndex] = useState(-1);
-    const [authorToUpdateIndex,setAuthorToUpdateIndex] = useState(-1);
-    const [authorToUpdate,setAuthorToUpdate] = useState({name: ''});
+    const [authorToDeleteIndex, setAuthorToDeleteIndex] = useState(-1);
+    const [authorToUpdateIndex, setAuthorToUpdateIndex] = useState(-1);
+    const [authorToUpdate, setAuthorToUpdate] = useState<IAuthor | null>(null);
 
     const handleFormClose = () => setShowAuthorForm(false);
 
@@ -31,7 +31,7 @@ const AuthorSection: React.FC = () => {
     }
 
     const handleAuthorUpdate = (name: string) => {
-        if(!authors || authorToUpdate === null) {
+        if (!authors || authorToUpdate === null) {
             return;
         }
 
@@ -40,13 +40,15 @@ const AuthorSection: React.FC = () => {
         setAuthors(listOfAuthors);
         setAuthorToUpdateIndex(-1);
         setAlertMessage('Author Updated');
+        setShowAuthorForm(false);
+        setAuthorToUpdate(null);
     }
 
     useEffect(() => {
-       if(authorToUpdateIndex === -1) {
-           return;
-       }
-       setAuthorToUpdate(authors[authorToUpdateIndex]);
+        if (authorToUpdateIndex === -1) {
+            return;
+        }
+        setAuthorToUpdate(authors[authorToUpdateIndex]);
     }, [authorToUpdateIndex]);
 
     const handleDeleteRequest = (index: number) => {
@@ -90,15 +92,15 @@ const AuthorSection: React.FC = () => {
     }
 
     const renderAlerts = () => {
-        if(authorToastVisibility) {
+        if (authorToastVisibility) {
             return (
                 <ToastAlert alertMessage={alertMessage}/>
             );
         }
-        if(deleteAlertVisibility) {
+        if (deleteAlertVisibility) {
             return (
                 <DeleteAlert onDeleteConfirmation={handleDeleteConfirmation}
-                             onAuthorDeletionCancel={handleDeleteCancellation} />
+                             onAuthorDeletionCancel={handleDeleteCancellation}/>
             );
         }
     }
@@ -107,19 +109,19 @@ const AuthorSection: React.FC = () => {
         <div className="px-lg-4 px-md-3 px-sm-2 px-1">
             <Row>
                 <Col className="section-title">
-                    <AuthorTitle />
+                    <AuthorTitle/>
                 </Col>
             </Row>
             <Row>
                 <Col className="text-start pt-2">
-                     <AuthorList authors={authors}
-                                 onEditRequest={handleEditRequest}
-                                 onDeleteRequest={handleDeleteRequest}/>
+                    <AuthorList authors={authors}
+                                onEditRequest={handleEditRequest}
+                                onDeleteRequest={handleDeleteRequest}/>
                 </Col>
             </Row>
             <Row className="add-author mx-0 px-0">
                 <Col className="py-1 px-0 mx-0  w-auto col-3" onClick={handleAddAuthorRequest}>
-                    <AddAuthor />
+                    <AddAuthor/>
                 </Col>
             </Row>
             <Row>
